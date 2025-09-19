@@ -157,7 +157,8 @@ class Bot:
                                         days=(SATURDAY, SUNDAY)) #sat, sun
         application.job_queue.run_daily(callback=self.__set_chanel_datetime, time=time(hour=4, minute=1),
                                         days=(0,1,2,3,4,5,6)) #everyday :)
-        application.run_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN, webhook_url="https://pulsebot-f65l.onrender.com/" + TOKEN)
+        HOOKURL = "https://pulsebot-f65l.onrender.com/"
+        application.run_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN, webhook_url=HOOKURL + TOKEN, drop_pending_updates=True, allow_redirects=Update.ALL_TYPES)
         
 
 
