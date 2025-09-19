@@ -20,6 +20,7 @@ SUNDAY = 6
 
 load_dotenv()
 TOKEN = os.getenv('BOT_TOKEN')
+PORT = int(os.getenv('PORT'))
 
 class Config:
     token = TOKEN
@@ -156,7 +157,8 @@ class Bot:
                                         days=(SATURDAY, SUNDAY)) #sat, sun
         application.job_queue.run_daily(callback=self.__set_chanel_datetime, time=time(hour=4, minute=1),
                                         days=(0,1,2,3,4,5,6)) #everyday :)
-        application.run_polling(allowed_updates=Update.ALL_TYPES)
+        application.run_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN, webhook_url="https://pulsebot-f65l.onrender.com/" + TOKEN)
+        
 
 
 if __name__ == "__main__":
